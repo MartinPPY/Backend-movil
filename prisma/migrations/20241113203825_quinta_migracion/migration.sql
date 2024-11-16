@@ -1,0 +1,7 @@
+-- AlterTable
+ALTER TABLE "auto" ALTER COLUMN "conductor" DROP DEFAULT,
+ALTER COLUMN "conductor" SET DATA TYPE TEXT;
+
+-- AlterTable
+ALTER TABLE "conductor" ALTER COLUMN "auto" DROP DEFAULT,
+ALTER COLUMN "auto" SET DATA TYPE TEXT;
