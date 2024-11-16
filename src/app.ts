@@ -10,12 +10,7 @@ const app = express()
 
 app.use(express.json())
 
-app.use(cors({
-    origin: ["http://localhost:8100"],
-    methods: 'GET,POST,PUT,DELETE,PATCH',
-    credentials: true
-
-}))
+app.use(cors())
 
 //RUTAS O ENDPOINTS
 app.use('/users', pasajeroRoutes)
