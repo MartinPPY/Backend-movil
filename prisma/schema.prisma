@@ -8,11 +8,12 @@ datasource db {
 }
 
 model conductor {
-  id       Int    @id @default(autoincrement())
-  username String @unique
-  email    String @unique
-  password String @unique
-  auto     String
+  id          Int    @id @default(autoincrement())
+  username    String @unique
+  email       String @unique
+  password    String @unique
+  tipoUsuario String
+  auto        String
 }
 
 model auto {
@@ -22,19 +23,27 @@ model auto {
 }
 
 model pasajero {
-  id       Int    @id @default(autoincrement())
-  username String @unique
-  email    String @unique
-  password String @unique
+  id          Int    @id @default(autoincrement())
+  username    String @unique
+  email       String @unique
+  password    String @unique
+  tipoUsuario String
+}
+
+model usuario {
+  id          Int    @id @default(autoincrement())
+  username    String @unique
+  email       String @unique
+  password    String @unique
+  tipoUsuario String
 }
 
 model viaje {
-  id           Int    @id @default(autoincrement())
-  fechainicio  String
-  horainicio   String
-  fechatermino String
-  horatermino  String
-  capacidad    Int
-  conductor    Int
-  pasajero     Int
+  id          Int    @id @default(autoincrement())
+  salida      String
+  destino     String
+  fechainicio String
+  horainicio  String
+  capacidad   Int
+  conductor   String
 }

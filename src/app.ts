@@ -3,6 +3,8 @@ import express from 'express'
 import cors from 'cors'
 import pasajeroRoutes from './routes/pasajeroRoutes'
 import conductorRoutes from './routes/conductorRoutes'
+import usuarioRoutes from './routes/userRoutes'
+import viajesRoutes from './routes/viajesRoutes'
 
 dotenv.config()
 
@@ -15,6 +17,8 @@ app.use(cors())
 //RUTAS O ENDPOINTS
 app.use('/users', pasajeroRoutes)
 app.use('/users', conductorRoutes)
+app.use('/users', usuarioRoutes)
+app.use('/viajes', viajesRoutes)
 
 
 console.log("iniciando el servidor!")

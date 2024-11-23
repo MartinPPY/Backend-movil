@@ -2,6 +2,7 @@ import { Request, Response } from 'express';
 import pasajero from '../models/prisma/pasajeroPrisma'
 import conductor from '../models/prisma/conductorPrisma'
 import auto from '../models/prisma/auto'
+import user from '../models/prisma/usuarioPrisma'
 import { cifrarPassword, compararCifrado, generarToken } from '../services/authServices';
 
 
@@ -25,7 +26,7 @@ export const getAllConductores = async (req: Request, res: Response): Promise<vo
 //REGISTRO
 export const registroConductor = async (req: Request, res: Response): Promise<void> => {
 
-    const { username, email, password, patente, marca } = req.body
+    const { username, email, password, patente, marca, tipoUsuario } = req.body
     const datos: any = { username: username, email: email, password: password, patente: patente, marca: marca }
     const datosProcesar = Object.keys(datos)
 
@@ -59,7 +60,17 @@ export const registroConductor = async (req: Request, res: Response): Promise<vo
                 email: email,
                 password: hashedPassword,
                 username: username,
-                auto: patente
+                auto: patente,
+                tipoUsuario: 'conductor'
+            }
+        })
+
+        await user.create({
+            data: {
+                email: email,
+                password: hashedPassword,
+                username: username,
+                tipoUsuario: 'conductor'
             }
         })
 
@@ -124,7 +135,7 @@ export const loginConductor = async (req: Request, res: Response): Promise<void>
 
         const token = generarToken(user)
 
-        res.status(200).json({ token })
+        res.status(200).json({ token: token, user: user })
 
 
     } catch (error: any) {

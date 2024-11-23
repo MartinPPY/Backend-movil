@@ -46,7 +46,8 @@ export const registroPasajero = async (req: Request, res: Response): Promise<voi
             data: {
                 email: email,
                 password: hashedPassword,
-                username: username
+                username: username,
+                tipoUsuario: 'pasajero'
             }
         })
 
@@ -102,7 +103,7 @@ export const loginPasajero = async (req: Request, res: Response): Promise<void> 
 
         const token = generarToken(pasajero)
 
-        res.status(200).json({ token })
+        res.status(200).json({ token: token, user: pasajero })
 
 
     } catch (error: any) {
