@@ -177,3 +177,16 @@ export const updatePassword = async (req: Request, res: Response) => {
     }
 
 }
+
+//GET BY EMAIL
+export const getConductorByEmail = async (req: Request, res: Response) => {
+    const userEmail = req.params.email
+    try {
+        const user = await conductor.findUnique({ where: { email: userEmail } })
+        res.status(200).json({ user })
+    } catch (error: any) {
+        res.status(500).json({ message: 'Error en el servidor' })
+        console.log(error)
+    }
+
+}
