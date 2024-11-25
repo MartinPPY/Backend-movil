@@ -5,6 +5,7 @@ import pasajeroRoutes from './routes/pasajeroRoutes'
 import conductorRoutes from './routes/conductorRoutes'
 import usuarioRoutes from './routes/userRoutes'
 import viajesRoutes from './routes/viajesRoutes'
+import solicitudRoutes from './routes/solicitudRoutes'
 
 dotenv.config()
 
@@ -19,6 +20,7 @@ app.use('/users', pasajeroRoutes)
 app.use('/users', conductorRoutes)
 app.use('/users', usuarioRoutes)
 app.use('/viajes', viajesRoutes)
+app.use('/solicitud', solicitudRoutes)
 
 
 console.log("iniciando el servidor!")

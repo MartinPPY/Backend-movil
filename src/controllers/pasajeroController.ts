@@ -1,5 +1,6 @@
 import { Request, Response } from 'express';
 import prisma from '../models/prisma/pasajeroPrisma'
+import usuario from '../models/prisma/usuarioPrisma'
 import { cifrarPassword, compararCifrado, generarToken } from '../services/authServices';
 import pasajero from '../models/prisma/pasajeroPrisma';
 
@@ -48,6 +49,15 @@ export const registroPasajero = async (req: Request, res: Response): Promise<voi
                 password: hashedPassword,
                 username: username,
                 tipoUsuario: 'pasajero'
+            }
+        })
+
+        await usuario.create({
+            data: {
+                email: email,
+                password: hashedPassword,
+                tipoUsuario: 'pasajero',
+                username: username
             }
         })
 
@@ -145,4 +155,16 @@ export const updatePassword = async (req: Request, res: Response) => {
 
     }
 
+}
+
+//GET : EMAIL
+export const traerPasajeroByEmail = async (req: Request, res: Response) => {
+    const userEmail = req.params.email
+    try {
+        const user = await prisma.findUnique({ where: { email: userEmail } })
+        res.status(200).json({ user })
+    } catch (error: any) {
+        res.status(500).json({ message: 'error en el servidor!' })
+        console.log(error)
+    }
 }

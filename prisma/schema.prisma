@@ -47,3 +47,14 @@ model viaje {
   capacidad   Int
   conductor   String
 }
+
+model solicitud {
+  id          Int    @id @default(autoincrement())
+  salida      String
+  destino     String
+  fechainicio String
+  horainicio  String
+  capacidad   Int
+  conductor   String
+  pasajero   String
+}

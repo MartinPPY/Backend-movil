@@ -65,3 +65,56 @@ export const getViajeByEmail = async (req: Request, res: Response) => {
     }
 
 }
+
+//GET:CORREO
+export const getViajeById = async (req: Request, res: Response) => {
+
+    const viajeId = parseInt(req.params.id)
+
+    try {
+
+        const getViaje = await viaje.findUnique({ where: { id: viajeId } })
+
+        if (!getViaje) {
+            res.status(404).json({ message: 'Aun no hay viajes de este usuario!' })
+            return
+        }
+
+        res.status(200).json({ getViaje })
+
+    } catch (error: any) {
+        res.status(500).json({ message: 'error en el servidor!', error: error })
+        console.log(error)
+    }
+
+}
+
+//GET ALL
+export const getViajes = async (req: Request, res: Response): Promise<void> => {
+    try {
+        const viajes = await viaje.findMany()
+        res.status(200).json(viajes)
+    } catch (error: any) {
+        res.status(500).json({ message: 'error en el servidor!' })
+        console.log(error)
+    }
+}
+
+//PUT CAPACIDAD
+export const actualizarCapacidad = async (req: Request, res: Response): Promise<void> => {
+    try {
+        const viajeId = parseInt(req.params.id)
+        let dataToUpdate: any = { ...req.body }
+
+        await viaje.update({
+            where: { id: viajeId },
+            data: dataToUpdate
+        })
+
+        res.status(200).json({ message: 'Registro actualizado!' })
+
+    } catch (error: any) {
+        res.status(500).json({ message: 'error en el servidor!' })
+        console.log(error)
+    }
+}

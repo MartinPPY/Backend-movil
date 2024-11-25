@@ -15,7 +15,7 @@ export const getUsuarioByEmail = async (req: Request, res: Response) => {
         const user = await usuario.findUnique({ where: { email: userEmail } })
 
         if (!user) {
-            res.status(400).json({ message: 'Usuario no encontrado!' })
+            res.status(404).json({ message: 'Usuario no encontrado!' })
             return
         }
 
