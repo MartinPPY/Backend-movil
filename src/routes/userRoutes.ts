@@ -3,6 +3,6 @@ import { getUsuarioByEmail } from '../controllers/userController'
 
 const router = express.Router()
 
-router.get('/buscar_usuarios/:email', getUsuarioByEmail)
+router.get('/buscar_user/:email', getUsuarioByEmail)
 
 export default router

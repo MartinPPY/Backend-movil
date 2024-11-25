@@ -40,6 +40,14 @@ export const registroConductor = async (req: Request, res: Response): Promise<vo
             }
         }
 
+        const autos = await auto.findMany()
+        for (let i = 0; i < autos.length; i++) {
+            if (patente == autos[i].patente) {
+                res.status(400).json({ message: 'Patente ya registrada!' })
+                return
+            }
+        }
+
         const pasajeros = await pasajero.findMany()
 
         for (let i = 0; i < pasajeros.length; i++) {
@@ -94,6 +102,11 @@ export const registroConductor = async (req: Request, res: Response): Promise<vo
 
         if (error.code == 'P2002' && error.meta.target.includes('email')) {
             res.status(400).json({ message: 'Email ya registrado!' })
+            return
+        }
+
+        if (error.code == 'P2002' && error.meta.target.includes('patente')) {
+            res.status(400).json({ message: 'Patente ya registrada!' })
             return
         }
 
